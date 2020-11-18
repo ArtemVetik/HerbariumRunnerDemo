@@ -34,15 +34,18 @@ public class MapRow : MonoBehaviour
 
     public void Spawn(Vector3 startPosition, Vector3 shift)
     {
-        MapObject inst = null;
+        List<MapObject> instObjects = new List<MapObject>();
         foreach (MapObject mapObject in _row)
         {
-            inst = Instantiate(mapObject, startPosition, Quaternion.identity, transform);
+            var inst = Instantiate(mapObject, startPosition, Quaternion.identity, transform);
+            instObjects.Add(inst);
             startPosition += shift;
         }
 
-        inst.BecameInvisible += OnObjectBecameInvisibe;
-        inst.BecameVisible += OnObjectBecameVisible;
+        instObjects[0].BecameInvisible += OnObjectBecameInvisibe;
+        instObjects[0].BecameVisible += OnObjectBecameVisible;
+
+        _row = instObjects;
     }
 
     private void OnObjectBecameInvisibe(MapObject mapObject)
