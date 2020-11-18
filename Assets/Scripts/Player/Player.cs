@@ -58,11 +58,11 @@ public class Player : MonoBehaviour
     {
         MapPosition nextPosition = _navigator.GetNextPosition(from, _moveDirection);
 
-        if (_navigator.Is<Floor>(nextPosition))
+        if (_navigator.GetMapObject(nextPosition) is Floor)
             return nextPosition;
         
         nextPosition = _navigator.GetNextPosition(from, Vector2Int.up);
-        if (_navigator.Is<Floor>(nextPosition))
+        if (_navigator.GetMapObject(nextPosition) is Floor)
             return nextPosition;
 
         return from;

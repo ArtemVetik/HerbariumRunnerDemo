@@ -24,9 +24,9 @@ public class MapNavigator : MonoBehaviour
         return _generator.Map[index][position.RowPosition].transform.position;
     }
 
-    public bool Is<T>(MapPosition position) where T : MapObject
+    public MapObject GetMapObject(MapPosition position)
     {
         int index = _generator.Map.IndexOf(position.MapRow);
-        return _generator.Map[index][position.RowPosition] is T;
+        return _generator.Map[index][position.RowPosition];
     }
 }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomPattern : RowGenerationPattern
+public class RandomGenerationPattern : RowGenerationPattern
 {
 
-    public RandomPattern(List<MapRow> map, MapObjectContainer container)
+    public RandomGenerationPattern(List<MapRow> map, MapObjectContainer container)
         : base(map, container)
     {
     }
@@ -16,7 +16,8 @@ public class RandomPattern : RowGenerationPattern
         for (int i = 0; i < size; i++)
             row.Add(ObjectContainer.GetObject<Wall>());
 
-        row[size / 2] = ObjectContainer.GetObject<Floor>();
+        int randomIndex = Random.Range(0, size);
+        row[randomIndex] = ObjectContainer.GetObject<Floor>();
 
         return row;
     }

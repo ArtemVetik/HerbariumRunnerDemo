@@ -16,7 +16,7 @@ public class MapGenerator : MonoBehaviour
     private void Start()
     {
         _map = new List<MapRow>();
-        _map.Add(SpawnRow(Vector3.zero, new RandomPattern(_map, _container)));
+        _map.Add(SpawnRow(Vector3.zero, new RandomGenerationPattern(_map, _container)));
 
         for (int i = 1; i < 24; i++)
             _map.Add(SpawnRow(Vector3.zero + Vector3.forward * i, new PreviousPattern(_map, _container)));
