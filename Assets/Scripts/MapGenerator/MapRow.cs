@@ -1,40 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public enum CellType
+public class MapRow : MonoBehaviour
 {
-    Empty, Wall,
-}
+    [SerializeField] private int _width;
 
-public class MapRow
-{
-    private List<CellType> _row;
+    private List<MapObject> _row;
+
+    public event UnityAction<MapRow> BecameVisible;
+    public event UnityAction<MapRow> BecameInvisible;
 
     public int Count => _row.Count;
-    public CellType this[int index] => _row[index];
+    public MapObject this[int index] => _row[index];
 
-    public MapRow(int size, int startPosition)
+    public void Init(RowGenerationPattern generationPattern)
     {
-        InitRow(size, CellType.Wall);
-
-        _row[startPosition] = CellType.Empty;
-    }
-
-    public MapRow(int size, MapRow previousRow)
-    {
-        InitRow(size, CellType.Wall);
-
-        List<int> nextPositions = GetRandomNextPositions(previousRow);
-        for (int i = 0; i < nextPositions.Count; i++)
-            AddEmptyCell(nextPositions[i], (float)nextPositions.Count / previousRow.GetEmptyPositions().Count);
-    }
-
-    private void InitRow(int size, CellType type)
-    {
-        _row = new List<CellType>(size);
-        for (int i = 0; i < size; i++)
-            _row.Add(type);
+        _row = generationPattern.GenerateRow(_width);
     }
 
     public List<int> GetEmptyPositions()
@@ -42,38 +25,35 @@ public class MapRow
         List<int> emptyPositions = new List<int>();
         for (int index = 0; index < _row.Count; index++)
         {
-            if (_row[index] == CellType.Empty)
+            if (_row[index] is Floor)
                 emptyPositions.Add(index);
         }
 
         return emptyPositions;
     }
 
-    private List<int> GetRandomNextPositions(MapRow previousRow)
+    public void Spawn(Vector3 startPosition, Vector3 shift)
     {
-        List<int> emptyPositions = previousRow.GetEmptyPositions();
-        int removeCount = Random.Range(0, emptyPositions.Count);
+        MapObject inst = null;
+        foreach (MapObject mapObject in _row)
+        {
+            inst = Instantiate(mapObject, startPosition, Quaternion.identity, transform);
+            startPosition += shift;
+        }
 
-        for (int i = 0; i < removeCount; i++)
-            emptyPositions.RemoveAt(Random.Range(0, emptyPositions.Count));
-
-        return emptyPositions;
+        inst.BecameInvisible += OnObjectBecameInvisibe;
+        inst.BecameVisible += OnObjectBecameVisible;
     }
 
-    private void AddEmptyCell(int position, float probability)
+    private void OnObjectBecameInvisibe(MapObject mapObject)
     {
-        _row[position] = CellType.Empty;
-
-        Debug.Log((float)position / _row.Count);
-
-        if (position + 1 < _row.Count && TrueFalseEvent(probability))
-            _row[position + 1] = CellType.Empty;
-        if (position - 1 >= 0 && TrueFalseEvent(probability))
-            _row[position - 1] = CellType.Empty;
+        mapObject.BecameInvisible -= OnObjectBecameInvisibe;
+        BecameInvisible?.Invoke(this);
     }
 
-    private bool TrueFalseEvent(float probability)
+    private void OnObjectBecameVisible(MapObject mapObject)
     {
-        return Random.Range(0f, 1f) < probability;
+        mapObject.BecameVisible -= OnObjectBecameVisible;
+        BecameVisible?.Invoke(this);
     }
 }

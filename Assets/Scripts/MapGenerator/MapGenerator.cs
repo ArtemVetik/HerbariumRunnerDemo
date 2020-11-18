@@ -4,50 +4,38 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] private int _width;
+    [SerializeField] private Transform _mapRoot;
+    [SerializeField] private MapRow _rowTemplate;
+    [SerializeField] private MapObjectContainer _container;
+
     private List<MapRow> _map;
 
     private void Start()
     {
         _map = new List<MapRow>();
-        _map.Add(new MapRow(_width, _width / 2));
+        _map.Add(SpawnRow(Vector3.zero, new RandomPattern(_map, _container)));
 
-        for (int i = 0; i < 60; i++)
-            _map.Add(new MapRow(_width, _map[_map.Count - 1]));
-
-        StartCoroutine(Generate());
+        for (int i = 1; i < 24; i++)
+            _map.Add(SpawnRow(Vector3.zero + Vector3.forward * i, new PreviousPattern(_map, _container)));
     }
 
-    private IEnumerator Generate() 
+    private MapRow SpawnRow(Vector3 startPosition, RowGenerationPattern pattern)
     {
-        while (true) 
-        {
-            _map.Add(new MapRow(_width, _map[_map.Count - 1]));
-            yield return new WaitForSeconds(0.2f);
-        }
+        MapRow instRow = Instantiate(_rowTemplate, startPosition, Quaternion.identity, _mapRoot);
+        instRow.Init(pattern);
+        instRow.Spawn(startPosition, Vector3.right);
+        instRow.BecameInvisible += OnRowBecameInvisible;
+
+        return instRow;
     }
 
-    private void OnDrawGizmos()
+    private void OnRowBecameInvisible(MapRow row)
     {
-        if (_map == null)
-            return;
+        row.BecameInvisible -= OnRowBecameInvisible;
+        Destroy(row.gameObject);
+        _map.Remove(row);
 
-        float x = 0, y = 0;
-
-        for (int i = 0; i < _map.Count; i++)
-        {
-            for (int j = 0; j < _width; j++)
-            {
-                if (_map[i][j] == CellType.Wall)
-                    Gizmos.color = Color.red;
-                else
-                    Gizmos.color = Color.green;
-
-                Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
-                x += 1f;
-            }
-            x = 0f;
-            y += 1f;
-        }
+        Vector3 nextPosition = _map[_map.Count - 1].transform.position + Vector3.forward;
+        _map.Add(SpawnRow(nextPosition, new PreviousPattern(_map, _container)));
     }
 }
