@@ -418,6 +418,8 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -641,6 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5821090850907694678}
   - component: {fileID: 4486333481885207340}
+  - component: {fileID: 7597237419793551465}
   m_Layer: 0
   m_Name: Girl
   m_TagString: Untagged
@@ -683,6 +686,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7597237419793551465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391518120079774789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a2a368b8c5c4a40bb56b0f64f53e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 300
 --- !u!1 &7520974752070366217
 GameObject:
   m_ObjectHideFlags: 0

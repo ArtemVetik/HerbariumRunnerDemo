@@ -388,6 +388,8 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -672,6 +674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7323868458459948439}
   - component: {fileID: 804341471756273901}
+  - component: {fileID: -3991896542442635600}
   m_Layer: 0
   m_Name: Cowboy
   m_TagString: Untagged
@@ -714,6 +717,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-3991896542442635600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050799781908289412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a2a368b8c5c4a40bb56b0f64f53e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 300
 --- !u!1 &6716255138115598280
 GameObject:
   m_ObjectHideFlags: 0

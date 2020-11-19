@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(FolowingMove))]
 public class Player : MonoBehaviour
@@ -11,6 +12,9 @@ public class Player : MonoBehaviour
     private FolowingMove _folowingMove;
     private MapPosition _currentPosition;
     private Vector2Int _moveDirection;
+
+    public event UnityAction<Vector2Int> StartMoveNext;
+    public event UnityAction StopMove;
 
     private void Awake()
     {
@@ -47,11 +51,16 @@ public class Player : MonoBehaviour
     {
         MapPosition nextPosition = GetNextPosition(_currentPosition);
         if (nextPosition.Equals(_currentPosition))
+        {
+            StopMove?.Invoke();
             return;
+        }
 
         _currentPosition = nextPosition;
         Vector3 scenePosition = _navigator.ToScenePosition(_currentPosition);
         _folowingMove.Move(scenePosition);
+
+        StartMoveNext?.Invoke(_moveDirection);
     }
 
     private MapPosition GetNextPosition(MapPosition from)

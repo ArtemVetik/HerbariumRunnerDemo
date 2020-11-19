@@ -106,6 +106,8 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -641,6 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7349889671574280788}
   - component: {fileID: 615320201917626158}
+  - component: {fileID: 8485994641796133680}
   m_Layer: 0
   m_Name: Boy
   m_TagString: Untagged
@@ -674,7 +677,7 @@ Animator:
   m_GameObject: {fileID: 5790314585590966343}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 9d28e056ffbbde44c87a84ae6cf7f122, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 498a9a4e0c3741b4f85fc0f6e9b16d9d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -683,6 +686,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8485994641796133680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5790314585590966343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a2a368b8c5c4a40bb56b0f64f53e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 300
 --- !u!1 &5950364830595583995
 GameObject:
   m_ObjectHideFlags: 0
