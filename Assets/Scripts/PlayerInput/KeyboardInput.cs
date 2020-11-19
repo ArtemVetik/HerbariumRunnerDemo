@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class KeyboardInput : BaseInputSystem
 {
     public override event UnityAction<Vector2Int> ChangeDirection;
-    public override event UnityAction<Vector2Int> DoubleClicked;
+    public override event UnityAction DoubleClicked;
 
     private void Update()
     {
@@ -16,5 +16,8 @@ public class KeyboardInput : BaseInputSystem
             ChangeDirection?.Invoke(Vector2Int.left);
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             ChangeDirection?.Invoke(Vector2Int.up);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            DoubleClicked?.Invoke();
     }
 }

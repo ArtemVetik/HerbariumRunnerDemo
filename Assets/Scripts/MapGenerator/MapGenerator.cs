@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.Transform _mapRoot;
+    [SerializeField] private Transform _mapRoot;
     [SerializeField] private Player _player;
     [SerializeField] private MapRow _rowTemplate;
     [SerializeField] private MapObjectContainer _container;

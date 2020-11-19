@@ -30,14 +30,14 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool(RunKey, false);
     }
 
-    private void OnStartMoveNext(Vector2Int direction)
+    private void OnStartMoveNext()
     {
         _animator.SetBool(RunKey, true);
-        _targetYrotation = 90 * direction.x;
     }
 
     private void Update()
     {
+        _targetYrotation = 90 * _player.MoveDirection.x;
         float playerRotation = _player.transform.eulerAngles.y;
         playerRotation = (playerRotation > 180) ? playerRotation - 360 : playerRotation;
         float y = Mathf.MoveTowards(playerRotation, _targetYrotation, _rotationSpeed * Time.deltaTime);

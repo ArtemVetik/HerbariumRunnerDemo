@@ -9,7 +9,6 @@ public class MapRow : MonoBehaviour
 
     private List<MapObject> _row;
 
-    public event UnityAction<MapRow> BecameVisible;
     public event UnityAction<MapRow> BecameInvisible;
 
     public int Count => _row.Count;
@@ -43,20 +42,34 @@ public class MapRow : MonoBehaviour
         }
 
         instObjects[0].BecameInvisible += OnObjectBecameInvisibe;
-        instObjects[0].BecameVisible += OnObjectBecameVisible;
 
         _row = instObjects;
+    }
+
+    public void RemoveWall(Wall wall, Floor floor)
+    {
+        Floor instFloor = Instantiate(floor, wall.transform.position, Quaternion.identity, transform);
+
+        if (_row.IndexOf(wall) == 0)
+        {
+            wall.BecameInvisible -= OnObjectBecameInvisibe;
+            instFloor.BecameInvisible += OnObjectBecameInvisibe;
+        }
+
+        wall.Destroy();
+        int position = _row.IndexOf(wall);
+        _row[position] = instFloor;
+    }
+
+    public void Replace(int position, MapObject template)
+    {
+        var inst = Instantiate(template, _row[position].transform.position, Quaternion.identity);
+        _row[position] = inst;
     }
 
     private void OnObjectBecameInvisibe(MapObject mapObject)
     {
         mapObject.BecameInvisible -= OnObjectBecameInvisibe;
         BecameInvisible?.Invoke(this);
-    }
-
-    private void OnObjectBecameVisible(MapObject mapObject)
-    {
-        mapObject.BecameVisible -= OnObjectBecameVisible;
-        BecameVisible?.Invoke(this);
     }
 }

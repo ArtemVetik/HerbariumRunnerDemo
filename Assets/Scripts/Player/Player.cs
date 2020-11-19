@@ -7,14 +7,17 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [SerializeField] private MapNavigator _navigator;
+    [SerializeField] private MapDestroyer _destroyer;
     [SerializeField] private BaseInputSystem _controllerSystem;
 
     private FolowingMove _folowingMove;
     private MapPosition _currentPosition;
     private Vector2Int _moveDirection;
 
-    public event UnityAction<Vector2Int> StartMoveNext;
+    public event UnityAction StartMoveNext;
     public event UnityAction StopMove;
+
+    public Vector2Int MoveDirection => _moveDirection;
 
     private void Awake()
     {
@@ -25,12 +28,14 @@ public class Player : MonoBehaviour
     {
         _folowingMove.MoveEnded += OnMoveEnded;
         _controllerSystem.ChangeDirection += SetDirection;
+        _controllerSystem.DoubleClicked += OnDoubleClicked;
     }
 
     private void OnDisable()
     {
         _folowingMove.MoveEnded -= OnMoveEnded;
         _controllerSystem.ChangeDirection -= SetDirection;
+        _controllerSystem.DoubleClicked -= OnDoubleClicked;
     }
 
     private void OnMoveEnded()
@@ -47,9 +52,20 @@ public class Player : MonoBehaviour
         MoveNext();
     }
 
+    private void OnDoubleClicked()
+    {
+        MapPosition nextPosition = _navigator.GetNextPosition(_currentPosition, _moveDirection);
+        MapObject nextObject = _navigator.GetMapObject(nextPosition);
+        if (nextObject is Wall)
+        {
+            _destroyer.DestroyWall(nextPosition);
+            MoveNext();
+        }
+    }
+
     private void MoveNext()
     {
-        MapPosition nextPosition = GetNextPosition(_currentPosition);
+        MapPosition nextPosition = TryGetNextPosition(_currentPosition);
         if (nextPosition.Equals(_currentPosition))
         {
             StopMove?.Invoke();
@@ -60,10 +76,10 @@ public class Player : MonoBehaviour
         Vector3 scenePosition = _navigator.ToScenePosition(_currentPosition);
         _folowingMove.Move(scenePosition);
 
-        StartMoveNext?.Invoke(_moveDirection);
+        StartMoveNext?.Invoke();
     }
 
-    private MapPosition GetNextPosition(MapPosition from)
+    private MapPosition TryGetNextPosition(MapPosition from)
     {
         MapPosition nextPosition = _navigator.GetNextPosition(from, _moveDirection);
 

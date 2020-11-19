@@ -28,12 +28,24 @@ public class PreviousPattern : RowGenerationPattern
     private List<int> GetRandomNextPositions(MapRow previousRow)
     {
         List<int> emptyPositions = previousRow.GetEmptyPositions();
-        int removeCount = Random.Range(0, emptyPositions.Count);
+        List<int> nextEmptyPosition = new List<int>();
 
-        for (int i = 0; i < removeCount; i++)
-            emptyPositions.RemoveAt(Random.Range(0, emptyPositions.Count));
+        foreach (var item in emptyPositions)
+        {
+            int neighborsCount = 0;
+            if (emptyPositions.Contains(item - 1))
+                neighborsCount++;
+            if (emptyPositions.Contains(item + 1))
+                neighborsCount++;
 
-        return emptyPositions;
+            if (IsTrue(1 - (0.3f + neighborsCount * 0.2f)))
+                nextEmptyPosition.Add(item);
+        }
+
+        if (nextEmptyPosition.Count == 0)
+            nextEmptyPosition.Add(emptyPositions[Random.Range(0, emptyPositions.Count)]);
+
+        return nextEmptyPosition;
     }
 
     private void AddEmptyCell(int position, float probability)

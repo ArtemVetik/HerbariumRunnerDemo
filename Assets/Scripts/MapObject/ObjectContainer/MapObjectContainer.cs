@@ -8,7 +8,7 @@ public class MapObjectContainer : ScriptableObject
 {
     [SerializeField] private MapObject[] _mapObjects;
 
-    public MapObject GetObject<T>()
+    public MapObject GetObject<T>() where T : MapObject
     {
         foreach (MapObject mapObject in _mapObjects)
         {

@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Wall : MapObject
 {
-    
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

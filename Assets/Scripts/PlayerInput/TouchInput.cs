@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class TouchInput : BaseInputSystem
 {
     public override event UnityAction<Vector2Int> ChangeDirection;
-    public override event UnityAction<Vector2Int> DoubleClicked;
+    public override event UnityAction DoubleClicked;
 
     private void Update()
     {
