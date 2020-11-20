@@ -13,11 +13,15 @@ public class Player : MonoBehaviour
     private FolowingMove _folowingMove;
     private MapPosition _currentPosition;
     private Vector2Int _moveDirection;
+    private Vector3 _startPosition;
 
     public event UnityAction StartMoveNext;
+    public event UnityAction MoveEnded;
     public event UnityAction StopMove;
+    public event UnityAction Died;
 
     public Vector2Int MoveDirection => _moveDirection;
+    public float Distance => transform.position.z - _startPosition.z;
 
     private void Awake()
     {
@@ -40,6 +44,7 @@ public class Player : MonoBehaviour
 
     private void OnMoveEnded()
     {
+        MoveEnded?.Invoke();
         MoveNext();
     }
 
@@ -102,5 +107,10 @@ public class Player : MonoBehaviour
 
         if (_folowingMove.IsMoving == false)
             MoveNext();
+    }
+
+    private void OnBecameInvisible()
+    {
+        Died?.Invoke();
     }
 }

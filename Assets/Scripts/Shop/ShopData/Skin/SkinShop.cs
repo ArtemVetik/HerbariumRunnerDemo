@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkinShop : MonoBehaviour
 {
     [SerializeField] private SkinDataBase _skinDataBase;
+    [SerializeField] private GameBalance _balance;
     [SerializeField] private SkinListView _skinListView;
 
     private SkinSaved _skinSaved;
@@ -18,15 +19,6 @@ public class SkinShop : MonoBehaviour
         InitSellButtons(_skinPresenters);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F10))
-        {
-            PlayerPrefs.DeleteAll();
-            _skinSaved = new SkinSaved();
-        }
-    }
-
     private void OnSelectedButtonClick(SkinData skinData, SkinPresenter presenter)
     {
         _skinSaved.SetCurrentSkin(skinData);
@@ -35,8 +27,12 @@ public class SkinShop : MonoBehaviour
 
     private void OnSellButtonClicked(SkinData skinData, SkinPresenter presenter)
     {
+        if (_balance.Balance < skinData.Price)
+            return;
+
+        _balance.Spend(skinData.Price);
         _skinSaved.Add(skinData);
-        presenter.Unlock();
+        presenter.Unlock(); 
     }
 
     private void InitSellButtons(IEnumerable<SkinPresenter> skinPresenters)

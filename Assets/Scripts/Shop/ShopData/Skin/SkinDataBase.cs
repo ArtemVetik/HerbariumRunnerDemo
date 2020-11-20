@@ -7,6 +7,8 @@ public class SkinDataBase : ScriptableObject
 {
     [SerializeField] private List<SkinData> _skinDatas = new List<SkinData>();
 
+    public SkinData this[int index] => _skinDatas[index];
+
     public IEnumerable<SkinData> Data => _skinDatas;
     public int Count => _skinDatas.Count;
 }

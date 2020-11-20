@@ -21,6 +21,12 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_player == null)
+        {
+            enabled = false;
+            return;
+        }
+
         _player.StartMoveNext += OnStartMoveNext;
         _player.StopMove += OnStopMovement;
     }
@@ -47,6 +53,9 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_player == null)
+            return;
+
         _player.StartMoveNext -= OnStartMoveNext;
         _player.StopMove -= OnStopMovement;
     }
