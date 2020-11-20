@@ -65,6 +65,9 @@ public class Player : MonoBehaviour
 
     private void MoveNext()
     {
+        if (_folowingMove.IsMoving)
+            return;
+
         MapPosition nextPosition = TryGetNextPosition(_currentPosition);
         if (nextPosition.Equals(_currentPosition))
         {
@@ -85,7 +88,7 @@ public class Player : MonoBehaviour
 
         if (_navigator.GetMapObject(nextPosition) is Floor)
             return nextPosition;
-        
+
         nextPosition = _navigator.GetNextPosition(from, Vector2Int.up);
         if (_navigator.GetMapObject(nextPosition) is Floor)
             return nextPosition;
