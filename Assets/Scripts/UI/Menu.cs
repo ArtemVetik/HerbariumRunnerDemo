@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     [SerializeField] private GameBalance _balance;
+    [SerializeField] private SkinDataBase _dateBase;
 
     private void Update()
     {
@@ -15,7 +16,7 @@ public class Menu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F10))
         {
             PlayerPrefs.DeleteAll();
-            SkinSaved skinSaved = new SkinSaved();
+            SkinSaved skinSaved = new SkinSaved(_dateBase);
             skinSaved.Save(new JsonSaveLoad());
         }
     }

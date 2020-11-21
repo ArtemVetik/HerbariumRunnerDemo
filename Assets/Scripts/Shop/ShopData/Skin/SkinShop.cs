@@ -13,7 +13,7 @@ public class SkinShop : MonoBehaviour
 
     private void OnEnable()
     {
-        _skinSaved = new SkinSaved();
+        _skinSaved = new SkinSaved(_skinDataBase);
         _skinSaved.Load(new JsonSaveLoad());
         _skinPresenters = _skinListView.Render(_skinDataBase.Data, _skinSaved);
         InitSellButtons(_skinPresenters);

@@ -793,6 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _balance: {fileID: 11400000, guid: 712f8ef4294de974aadca7c0de2df9bd, type: 2}
+  _dateBase: {fileID: 11400000, guid: 85412adecd4d5b0419c3bd84bca749c2, type: 2}
 --- !u!1 &966942359
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,19 +13,23 @@ MonoBehaviour:
   m_Name: SkinDateBase
   m_EditorClassIdentifier: 
   _skinDatas:
-  - _prefab: {fileID: 5790314585590966343, guid: 186e8381a3f81344aa78df057ee16554, type: 3}
+  - _uid: 1
+    _prefab: {fileID: 5790314585590966343, guid: 186e8381a3f81344aa78df057ee16554, type: 3}
     _preview: {fileID: 21300000, guid: fda395a823b83194fbd92e6853809baa, type: 3}
     _name: Boy
     _price: 100
-  - _prefab: {fileID: 6050799781908289412, guid: 1545019f5dab65148b6c69ffb8604532, type: 3}
+  - _uid: 2
+    _prefab: {fileID: 6050799781908289412, guid: 1545019f5dab65148b6c69ffb8604532, type: 3}
     _preview: {fileID: 21300000, guid: a7d6d29faa42b254d94969b4ebb61086, type: 3}
     _name: Cowboy
     _price: 200
-  - _prefab: {fileID: 7391518120079774789, guid: b67716e530ee1f145a96bc270027e05b, type: 3}
+  - _uid: 3
+    _prefab: {fileID: 7391518120079774789, guid: b67716e530ee1f145a96bc270027e05b, type: 3}
     _preview: {fileID: 21300000, guid: 956c1d0980f4f4b44b3449e793965e55, type: 3}
     _name: Girl
     _price: 300
-  - _prefab: {fileID: 1871958496783849236, guid: 1ad515c62c843b9499e0b053036beda0, type: 3}
+  - _uid: 4
+    _prefab: {fileID: 1871958496783849236, guid: 1ad515c62c843b9499e0b053036beda0, type: 3}
     _preview: {fileID: 21300000, guid: 1c4f4d37ffed7e145999321e77ee0138, type: 3}
     _name: SportsWoman
     _price: 400

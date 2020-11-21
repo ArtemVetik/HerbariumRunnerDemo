@@ -9,10 +9,10 @@ public class FirstShopInitialization : MonoBehaviour
 
     private void Awake()
     {
-        SkinSaved skinSaved = new SkinSaved();
+        SkinSaved skinSaved = new SkinSaved(_skinDataBase);
         skinSaved.Load(new JsonSaveLoad());
-
-        if (skinSaved.BuyedSkins.Count == 0)
+        
+        if (skinSaved.GetSavedSkins().Count == 0)
         {
             skinSaved.Add(_skinDataBase[_numberOfDefaultSkin]);
             skinSaved.SetCurrentSkin(_skinDataBase[_numberOfDefaultSkin]);

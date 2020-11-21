@@ -14,7 +14,7 @@ public class JsonSaveLoad : ISaveLoadVisiter
             return JsonUtility.FromJson<SkinSaved>(saveJson);
         }
 
-        return new SkinSaved();
+        return null;
     }
 
     public void Save(SkinSaved skinSaved)

@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _balance: {fileID: 11400000, guid: 712f8ef4294de974aadca7c0de2df9bd, type: 2}
+  _dateBase: {fileID: 11400000, guid: 85412adecd4d5b0419c3bd84bca749c2, type: 2}
 --- !u!1 &289455416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fd7a51d9b0b2749a4854694611eea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dateBase: {fileID: 11400000, guid: 85412adecd4d5b0419c3bd84bca749c2, type: 2}
 --- !u!1 &1868124868
 GameObject:
   m_ObjectHideFlags: 0

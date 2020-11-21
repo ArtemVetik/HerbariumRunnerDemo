@@ -8,6 +8,7 @@ public class SkinDataBase : ScriptableObject
     [SerializeField] private List<SkinData> _skinDatas = new List<SkinData>();
 
     public SkinData this[int index] => _skinDatas[index];
+    public SkinData this[string uid] => _skinDatas.Find((skinData) => skinData.UID == uid);
 
     public IEnumerable<SkinData> Data => _skinDatas;
     public int Count => _skinDatas.Count;

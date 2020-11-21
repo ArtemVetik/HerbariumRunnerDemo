@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class SkinListView : MonoBehaviour
 {
     [SerializeField] private SkinPresenter _template;
-    [SerializeField] private UnityEngine.Transform _skinContainer;
+    [SerializeField] private Transform _skinContainer;
 
     private SkinPresenter _selectedSkin;
 
@@ -19,7 +19,7 @@ public class SkinListView : MonoBehaviour
             skinPresenters.Add(instSkin);
             instSkin.Render(skin);
 
-            if (unlockedSkins.BuyedSkins.Contains(skin))
+            if (unlockedSkins.GetSavedSkins().Contains(skin))
                 instSkin.Unlock();
 
             if (skin.Equals(unlockedSkins.CurrentSkin))
