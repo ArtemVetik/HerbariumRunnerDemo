@@ -27,11 +27,11 @@ public class DestroyViewer : MonoBehaviour
 
     private void OnReadyToDestroy()
     {
-        _image.color = Color.white;
+        _image.enabled = true;
     }
 
     private void OnMapDestroyed()
     {
-        _image.color = Color.gray;
+        _image.enabled = false;
     }
 }
