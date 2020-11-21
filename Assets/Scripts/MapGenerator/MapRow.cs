@@ -61,12 +61,6 @@ public class MapRow : MonoBehaviour
         _row[position] = instFloor;
     }
 
-    public void Replace(int position, MapObject template)
-    {
-        var inst = Instantiate(template, _row[position].transform.position, Quaternion.identity);
-        _row[position] = inst;
-    }
-
     private void OnObjectBecameInvisibe(MapObject mapObject)
     {
         mapObject.BecameInvisible -= OnObjectBecameInvisibe;

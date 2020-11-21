@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DistanceViewer : MonoBehaviour
 {
     [SerializeField] private Player _player;
+    [SerializeField] private string _unit;
 
     private Text _distanceText;
 
@@ -18,6 +19,7 @@ public class DistanceViewer : MonoBehaviour
     private void OnEnable()
     {
         _player.MoveEnded += OnPlayerMoveEnded;
+        OnPlayerMoveEnded();
     }
 
     private void OnDisable()
@@ -27,6 +29,6 @@ public class DistanceViewer : MonoBehaviour
 
     private void OnPlayerMoveEnded()
     {
-        _distanceText.text = _player.Distance.ToString();
+        _distanceText.text = _player.Distance.ToString() + _unit;
     }
 }

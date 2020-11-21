@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         _folowingMove.MoveEnded += OnMoveEnded;
         _controllerSystem.ChangeDirection += SetDirection;
         _controllerSystem.DoubleClicked += OnDoubleClicked;
+        Died += OnDied;
     }
 
     private void OnDisable()
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
         _folowingMove.MoveEnded -= OnMoveEnded;
         _controllerSystem.ChangeDirection -= SetDirection;
         _controllerSystem.DoubleClicked -= OnDoubleClicked;
+        Died -= OnDied;
     }
 
     private void OnMoveEnded()
@@ -107,6 +109,11 @@ public class Player : MonoBehaviour
 
         if (_folowingMove.IsMoving == false)
             MoveNext();
+    }
+
+    private void OnDied()
+    {
+        _controllerSystem.enabled = false;
     }
 
     private void OnBecameInvisible()

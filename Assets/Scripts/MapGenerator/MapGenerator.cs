@@ -9,26 +9,24 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private MapRow _rowTemplate;
     [SerializeField] private MapObjectContainer _container;
 
-    private List<MapRow> _map;
-
-    public List<MapRow> Map => _map;
+    public List<MapRow> Map { get; private set; }
 
     private void Start()
     {
-        _map = new List<MapRow>();
-        _map.Add(SpawnRow(Vector3.zero, new RandomGenerationPattern(_map, _container)));
+        Map = new List<MapRow>();
+        Map.Add(SpawnRow(Vector3.zero, new RandomGenerationPattern(Map, _container)));
 
         for (int i = 1; i < 24; i++)
-            _map.Add(SpawnRow(Vector3.zero + Vector3.forward * i, new PreviousPattern(_map, _container)));
+            Map.Add(SpawnRow(Vector3.zero + Vector3.forward * i, new PreviousPattern(Map, _container)));
 
-        int rowIndex = _map[0].GetEmptyPositions()[0];
-        _player.Init(new MapPosition(_map[0], rowIndex));
+        int rowIndex = Map[0].GetEmptyPositions()[0];
+        _player.Init(new MapPosition(Map[0], rowIndex));
     }
 
     private MapRow SpawnRow(Vector3 startPosition, RowGenerationPattern pattern)
     {
         MapRow instRow = Instantiate(_rowTemplate, startPosition, Quaternion.identity, _mapRoot);
-        instRow.name = _map.Count.ToString();
+        instRow.name = Map.Count.ToString();
         instRow.Init(pattern);
         instRow.Spawn(startPosition, Vector3.right);
         instRow.BecameInvisible += OnRowBecameInvisible;
@@ -40,9 +38,9 @@ public class MapGenerator : MonoBehaviour
     {
         row.BecameInvisible -= OnRowBecameInvisible;
         Destroy(row.gameObject);
-        _map.Remove(row);
+        Map.Remove(row);
 
-        Vector3 nextPosition = _map[_map.Count - 1].transform.position + Vector3.forward;
-        _map.Add(SpawnRow(nextPosition, new PreviousPattern(_map, _container)));
+        Vector3 nextPosition = Map[Map.Count - 1].transform.position + Vector3.forward;
+        Map.Add(SpawnRow(nextPosition, new PreviousPattern(Map, _container)));
     }
 }

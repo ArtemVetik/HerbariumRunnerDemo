@@ -8,7 +8,7 @@ public class PlayerPreview : MonoBehaviour
     {
         SkinSaved skinSaved = new SkinSaved();
         skinSaved.Load(new JsonSaveLoad());
-
+        
         Instantiate(skinSaved.CurrentSkin.Prefab, transform);
     }
 }
