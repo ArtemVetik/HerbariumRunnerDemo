@@ -11,7 +11,7 @@ public class FirstShopInitialization : MonoBehaviour
     {
         SkinSaved skinSaved = new SkinSaved(_skinDataBase);
         skinSaved.Load(new JsonSaveLoad());
-        
+
         if (skinSaved.GetSavedSkins().Count == 0)
         {
             skinSaved.Add(_skinDataBase[_numberOfDefaultSkin]);

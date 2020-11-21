@@ -16,7 +16,8 @@ public class MapGenerator : MonoBehaviour
         Map = new List<MapRow>();
         Map.Add(SpawnRow(Vector3.zero, new RandomGenerationPattern(Map, _container)));
 
-        for (int i = 1; i < 24; i++)
+        int startSize = (int)Camera.main.orthographicSize * 3;
+        for (int i = 1; i < startSize; i++)
             Map.Add(SpawnRow(Vector3.zero + Vector3.forward * i, new PreviousPattern(Map, _container)));
 
         int rowIndex = Map[0].GetEmptyPositions()[0];
