@@ -20,7 +20,7 @@ public class PreviousPattern : RowGenerationPattern
 
         List<int> nextPositions = GetRandomNextPositions(lastRow);
         for (int i = 0; i < nextPositions.Count; i++)
-            AddEmptyCell(nextPositions[i], 1f);
+            AddEmptyCell(nextPositions[i]);
 
         return _row;
     }
@@ -30,6 +30,17 @@ public class PreviousPattern : RowGenerationPattern
         List<int> emptyPositions = previousRow.GetEmptyPositions();
         List<int> emptyCopy = new List<int>(emptyPositions);
 
+        int firstPath = emptyPositions[Random.Range(0, emptyPositions.Count / 2)];
+        int secondPath = emptyPositions[Random.Range(emptyPositions.Count / 2, emptyPositions.Count)];
+
+        if (IsTrue(0.05f))
+        {
+            if (IsTrue(0.5f))
+                firstPath = secondPath;
+            else
+                secondPath = firstPath;
+        }
+
         foreach (var item in emptyPositions)
         {
             int neighborsCount = 0;
@@ -38,27 +49,26 @@ public class PreviousPattern : RowGenerationPattern
             if (emptyCopy.Contains(item + 1))
                 neighborsCount++;
 
-            if (IsTrue((0.2f + neighborsCount * 0.25f)))
+            if (IsTrue((0.4f + neighborsCount * 0.2f)))
                 emptyCopy.Remove(item);
         }
 
-        if (emptyCopy.Count == 0)
-            emptyCopy.Add(emptyPositions[Random.Range(0, emptyPositions.Count)]);
+        if (emptyCopy.Contains(firstPath) == false)
+            emptyCopy.Add(firstPath);
+        if (emptyCopy.Contains(secondPath) == false)
+            emptyCopy.Add(secondPath);
 
         return emptyCopy;
     }
 
-    private void AddEmptyCell(int position, float probability)
+    private void AddEmptyCell(int position)
     {
-        if (IsTrue(probability))
-            _row[position] = ObjectContainer.GetObject<Floor>();
-        else
-            return;
+        _row[position] = ObjectContainer.GetObject<Floor>();
 
-        if (position + 1 < _row.Count)
-            AddEmptyCell(position + 1, probability * 0.5f);
-        if (position - 1 >= 0)
-            AddEmptyCell(position - 1, probability * 0.5f);
+        if (position + 1 < _row.Count && IsTrue(0.4f))
+            _row[position + 1] = ObjectContainer.GetObject<Floor>();
+        if (position - 1 >= 0 && IsTrue(0.4f))
+            _row[position - 1] = ObjectContainer.GetObject<Floor>();
     }
 
     private bool IsTrue(float probability)
