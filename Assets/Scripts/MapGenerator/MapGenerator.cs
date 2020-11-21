@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -14,7 +13,7 @@ public class MapGenerator : MonoBehaviour
     private void Start()
     {
         Map = new List<MapRow>();
-        Map.Add(SpawnRow(Vector3.zero, new RandomGenerationPattern(Map, _container)));
+        Map.Add(SpawnRow(Vector3.zero, new RandomGenerationPattern(Map, 1, _container)));
 
         int startSize = (int)Camera.main.orthographicSize * 3;
         for (int i = 1; i < startSize; i++)

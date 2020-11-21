@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class FolowingMove : MonoBehaviour
 {
     [SerializeField] private CameraTranslate _cameraTranslate;
-    [Range(1f,2f), SerializeField] private float _rate = 1f;
+    [Range(1f,2f), SerializeField] private float _speedRate;
 
     private Vector3 _targetPosition;
 
@@ -27,7 +25,7 @@ public class FolowingMove : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _cameraTranslate.Speed * _rate * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _cameraTranslate.Speed * _speedRate * Time.deltaTime);
 
         if (transform.position == _targetPosition)
         {

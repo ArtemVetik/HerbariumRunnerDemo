@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,11 +17,11 @@ public class MapDestroyer : MonoBehaviour
         if (_canDestroy == false)
             return;
 
-        if (position.MapRow[position.RowPosition] is Wall == false)
+        if (position.Row[position.RowPosition] is Wall == false)
             return;
 
-        Wall wall = position.MapRow[position.RowPosition] as Wall;
-        position.MapRow.RemoveWall(wall, _container.GetObject<Floor>() as Floor);
+        Wall wall = position.Row[position.RowPosition] as Wall;
+        position.Row.RemoveWall(wall, _container.GetObject<Floor>() as Floor);
 
         StartCoroutine(DestroyDelay(_destroyDelay));
     }

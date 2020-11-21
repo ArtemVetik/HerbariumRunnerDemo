@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Game Balance", menuName = "Shop/GameBalance", order = 51)]
@@ -8,9 +6,9 @@ public class GameBalance : ScriptableObject
 {
     [SerializeField] private string _saveKey;
 
-    public float Balance { get; private set; }
-
     public event UnityAction<float> ValueChanged;
+
+    public float Balance { get; private set; }
 
     private void OnEnable()
     {

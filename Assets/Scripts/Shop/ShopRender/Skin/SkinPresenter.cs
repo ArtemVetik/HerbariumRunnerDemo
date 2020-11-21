@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -19,7 +17,6 @@ public class SkinPresenter : MonoBehaviour
 
     public event UnityAction<SkinData, SkinPresenter> SellButtonClick;
     public event UnityAction<SkinData, SkinPresenter> SelectedButtonClick;
-
 
     private void OnEnable()
     {

@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 11400000, guid: ef3bc1c84aa2c8e4898ff40012271155, type: 2}
-  _destroyDelay: 0
+  _destroyDelay: 10
 --- !u!1 &495870366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981b08bf2746dd141be33385868dff39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 963194227}
   _targetOrthographicSize: 8
 --- !u!1 &1073259312
 GameObject:
@@ -1701,7 +1702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraTranslate: {fileID: 963194229}
-  _rate: 1.5
+  _speedRate: 1.5
 --- !u!114 &1219272490
 MonoBehaviour:
   m_ObjectHideFlags: 0

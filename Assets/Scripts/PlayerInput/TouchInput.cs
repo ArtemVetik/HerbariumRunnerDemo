@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public struct TouchData
@@ -22,14 +20,14 @@ public class TouchInput : BaseInputSystem
     private float _maxDoubleTouchDistance = 30f;
     private float _maxDoubleTouchDelay = 0.2f;
 
-    public override event UnityAction<Vector2Int> ChangeDirection;
+    public override event UnityAction<Vector2Int> DirectionChanged;
     public override event UnityAction DoubleClicked;
 
     private void Update()
     {
         if (Input.touchCount == 0)
         {
-            ChangeDirection?.Invoke(Vector2Int.up);
+            DirectionChanged?.Invoke(Vector2Int.up);
             return;
         }
 
@@ -44,7 +42,7 @@ public class TouchInput : BaseInputSystem
         else if (directionTouch.phase == TouchPhase.Stationary && Time.time - _directionTouch.Time > 0.1f)
         {
             int direction = (int)Mathf.Sign(_directionTouch.Position.x - Camera.main.pixelWidth / 2);
-            ChangeDirection?.Invoke(Vector2Int.left * direction);
+            DirectionChanged?.Invoke(Vector2Int.left * direction);
         }
 
         if (Input.touchCount > 1)

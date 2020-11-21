@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(FolowingMove))]
@@ -31,7 +29,7 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         _folowingMove.MoveEnded += OnMoveEnded;
-        _controllerSystem.ChangeDirection += SetDirection;
+        _controllerSystem.DirectionChanged += SetDirection;
         _controllerSystem.DoubleClicked += OnDoubleClicked;
         Died += OnDied;
     }
@@ -39,7 +37,7 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         _folowingMove.MoveEnded -= OnMoveEnded;
-        _controllerSystem.ChangeDirection -= SetDirection;
+        _controllerSystem.DirectionChanged -= SetDirection;
         _controllerSystem.DoubleClicked -= OnDoubleClicked;
         Died -= OnDied;
     }

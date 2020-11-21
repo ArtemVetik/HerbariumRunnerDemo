@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +7,7 @@ public class MapRow : MonoBehaviour
     [SerializeField] private int _width;
 
     private List<MapObject> _row;
-
+    
     public event UnityAction<MapRow> BecameInvisible;
 
     public int Count => _row.Count;
@@ -42,7 +41,6 @@ public class MapRow : MonoBehaviour
         }
 
         instObjects[0].BecameInvisible += OnObjectBecameInvisibe;
-
         _row = instObjects;
     }
 

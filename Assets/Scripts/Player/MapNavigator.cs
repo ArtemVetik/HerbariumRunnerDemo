@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MapNavigator : MonoBehaviour
 {
@@ -8,7 +6,7 @@ public class MapNavigator : MonoBehaviour
     
     public MapPosition GetNextPosition(MapPosition from, Vector2Int direction)
     {
-        int nextRowIndex = _generator.Map.IndexOf(from.MapRow) + direction.y;
+        int nextRowIndex = _generator.Map.IndexOf(from.Row) + direction.y;
         MapRow nextRow = _generator.Map[nextRowIndex];
 
         int nextRowPosition = from.RowPosition + direction.x;
@@ -20,13 +18,13 @@ public class MapNavigator : MonoBehaviour
 
     public Vector3 ToScenePosition(MapPosition position)
     {
-        int index = _generator.Map.IndexOf(position.MapRow);
+        int index = _generator.Map.IndexOf(position.Row);
         return _generator.Map[index][position.RowPosition].transform.position;
     }
 
     public MapObject GetMapObject(MapPosition position)
     {
-        int index = _generator.Map.IndexOf(position.MapRow);
+        int index = _generator.Map.IndexOf(position.Row);
         return _generator.Map[index][position.RowPosition];
     }
 }

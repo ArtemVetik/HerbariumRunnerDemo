@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DynamicOrthographicSize : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
     [SerializeField] private float _targetOrthographicSize;
 
     private void Start()
     {
-        Camera.main.orthographicSize = _targetOrthographicSize * Screen.height / Screen.width / 2f;
+        _camera.orthographicSize = _targetOrthographicSize * Screen.height / Screen.width / 2f;
     }
 }
