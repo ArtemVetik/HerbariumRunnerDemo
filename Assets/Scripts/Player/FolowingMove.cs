@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class FolowingMove : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    [SerializeField] private CameraTranslate _cameraTranslate;
+    [Range(1f,2f), SerializeField] private float _rate = 1f;
 
     private Vector3 _targetPosition;
 
@@ -26,7 +27,7 @@ public class FolowingMove : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _cameraTranslate.Speed * _rate * Time.deltaTime);
 
         if (transform.position == _targetPosition)
         {

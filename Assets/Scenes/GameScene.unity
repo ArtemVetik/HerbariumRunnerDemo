@@ -1575,6 +1575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _accelerationRate: 0.05
 --- !u!1 &1073259312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,7 +1686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec58a40fe3318304bae5638cd89e209b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4.5
+  _cameraTranslate: {fileID: 963194229}
+  _rate: 1.5
 --- !u!114 &1219272490
 MonoBehaviour:
   m_ObjectHideFlags: 0
