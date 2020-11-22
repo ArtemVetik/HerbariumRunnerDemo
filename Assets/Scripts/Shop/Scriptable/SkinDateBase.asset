@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac64b7c3d7c63e749a22a871d2670cab, type: 3}
   m_Name: SkinDateBase
   m_EditorClassIdentifier: 
+  _defaultSkinUID: 1
   _skinDatas:
   - _uid: 1
     _prefab: {fileID: 5790314585590966343, guid: 186e8381a3f81344aa78df057ee16554, type: 3}

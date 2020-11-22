@@ -43,10 +43,15 @@ public class SkinSaved : ISavedObject
     {
         SkinSaved saved = saveLoadVisiter.Load(this);
         if (saved == null)
-            return;
-
-        _buyedUID = saved._buyedUID;
-        _currentUID = saved._currentUID;
+        {
+            _buyedUID.Add(_dataBase.DefaultSkinUID);
+            _currentUID = _dataBase.DefaultSkinUID;
+        }
+        else
+        {
+            _buyedUID = saved._buyedUID;
+            _currentUID = saved._currentUID;
+        }
     }
 
     public void Save(ISaveLoadVisiter saveLoadVisiter)

@@ -14,8 +14,8 @@ public class Menu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F10))
         {
             PlayerPrefs.DeleteAll();
-            SkinSaved skinSaved = new SkinSaved(_dateBase);
-            skinSaved.Save(new JsonSaveLoad());
+            //SkinSaved skinSaved = new SkinSaved(_dateBase);
+            //skinSaved.Save(new JsonSaveLoad());
         }
     }
 
